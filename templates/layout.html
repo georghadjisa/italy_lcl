@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<style>
+label {
+	display: block;
+}
+
+input:focus {
+  border: 3px solid #555;
+}
+
+input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+input[type=number], select {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+input.wider[type=number], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+input[type=button] {
+  background-color: #1B2C4D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+input[type=button]:hover {
+  background-color: #4484CA;
+}
+
+
+input[type=submit] {
+  width: 50%;
+  background-color: #2E5D90;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #4484CA;
+}
+
+
+label {
+  color: #1B2C4D;
+  font-weight: bold;
+  font-family:georgia,garamond,serif;
+  font-size:15px;
+}
+
+img {
+    max-width:100px;
+    max-height:100px;
+    width:auto;
+    height:auto;
+}
+
+</style>
+    <head>
+        <title>LCL Italy</title>
+    </head>
+    <body>
+        <h1 style="font-family:georgia,garamond,serif;font-size:35px; font-weight: bold; color: #29ABE2; vertical-align: middle; display: flex;" id="logo"><img src="{{url_for('static', filename='geologonobackgr.png')}}" alt="logo" />{% block heading %}{% endblock %}</h1>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    LCL Italy Cost Calculation
+{% endblock %}
+
+{% block body %}
+<script
+                src="https://code.jquery.com/jquery-1.12.4.min.js"
+                integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+                crossorigin="anonymous"></script>
+
+    <form action="{{ url_for('hello') }}" method="post">
+    	<label for="incot"> Incoterms: </label>
+    	<select id="incot" name="incoterms">
+    		<option value="exwr">EXW Regular</option>
+    		<option value="exws">EXW Special</option>
+    		<option value="fca">FCA</option>
+    	</select>
+        <div class="newinputs">
+    	<label> Dimensions: </label> 
+        <input required class="len" type="number" step="0.001" id= "len" name="length[]" placeholder="Length">
+        <input required class="wid" type="number" step="0.001" name="width[]" placeholder="Width">
+        <input required class="hei" type="number" step="0.001" name="height[]" placeholder="Height">
+        <label for="pallets"> Number of Pallets: </label>
+        <input required class="pkg" type="number" step="1" name="pallets[]" placeholder="Number of Pallets/Packages" value="0" min="0">
+        <label for="kilos"> Weight: </label>
+        <input required class="wei" type="number" step="0.001" name="kilos[]" placeholder="Kgs" class="wider">
+        </div>
+        <div id="TextBoxesGroup"></div>
+        <input type="button" id="addButton" value="Add More" />
+        <input type="button" id="removeButton" value="Remove" />
+        <input type="button" id="resetButton" value="Reset" />
+        <label for="postcode"> Postcode: </label> 
+        <input type="text" name="postcode" placeholder="Postcode">
+        <label for="unnum"> IMO UN Numbers: </label> 
+        <input required type="number" name="unnum" id="unnum" placeholder="IMO UN Numbers" value="0" min="0" class="wider">
+
+    </div>
+    <input type="submit" name="Create Table" value="Calculate">
+
+    </form>
+    <p style = "font-family:georgia,garamond,serif;font-size:15px; color: #1B2C4D"> 
+        Volume: {{ total_vol }}
+    <br>Kilos: {{ total_kgs }}
+    <br>Kilos/333: {{ ratio }}
+    <br>Postcode: {{ postcode }}
+    <br>IMO UN Numbers: {{imo}}
+    <br>
+    <br><b>EXW/FCA Cost:</b> {{ cost }}
+    <br><b>VGM Cost:</b> {{ vgm }}
+    <br><b>IMO Cost:</b> {{imo_c}}
+    <br><b>Overlength Cost:</b> {{over_c}}
+</p>
+    <p style = "font-family:georgia,garamond,serif;font-size:20px; color: #29ABE2;"><b>Total Cost: {{ value }} </b></p>
+
+    <script>
+$(function () {
+    $("#addButton").on("click", function () {
+        var counter = $(".newinputs").length;
+        
+        if (counter > 5) {
+            alert("Only 5 textboxes allow");
+            
+            return false;
+        }
+
+        var newinp = $(".newinputs").first().clone().addClass("newAdded");
+        
+        newinp.appendTo("#TextBoxesGroup");
+
+    });
+
+    $("#removeButton").click(function () {
+        var counter = $(".newinputs").length;
+        
+        if (counter == 1) {
+            alert("No more textbox to remove");
+            
+            return false;
+        }
+        
+        $(".newinputs").last().remove();
+
+    });
+    
+    $("#resetButton").click(function () {
+        $(".newAdded").remove();        
+    });
+});
+
+    </script>
+
+{% endblock %}
